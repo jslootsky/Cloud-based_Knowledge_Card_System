@@ -1,0 +1,69 @@
+{% extends 'cards/base.html' %}
+{% load cards_extras %}
+
+{% block title %}{{ card.title }}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <p class="muted">Browse / {{ card.title }}</p>
+  <h1>{{ card.title }}</h1>
+  <p>{{ card.summary }}</p>
+</section>
+
+<section class="detail-wrap">
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Primary Image</h2>
+      <form method="post" action="{% url 'cards:add_images' card.id %}" enctype="multipart/form-data" class="upload-inline">
+        {% csrf_token %}
+        {{ image_upload_form.images }}
+        <button type="submit" class="btn btn-subtle">Replace Image</button>
+      </form>
+    </div>
+
+    {% if card.images.first %}
+    <div class="gallery">
+      {% with image=card.images.first %}
+      <figure class="gallery-item">
+        <img src="{{ image.image_url }}" alt="{{ card.title }} primary image" class="detail-image" />
+        <figcaption>
+          <span class="muted">{{ image.storage_key }}</span>
+        </figcaption>
+      </figure>
+      {% endwith %}
+    </div>
+    {% endif %}
+  </div>
+
+  <aside class="panel info-panel">
+    <h3>Card Information</h3>
+
+    <h4>Tags</h4>
+    <div class="tag-wrap">
+      {% for tag in card.tags|split_csv %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+
+    <h4>Description</h4>
+    <p>{{ card.description|linebreaksbr }}</p>
+
+    <h4>Metadata</h4>
+    <ul class="meta-list">
+      <li>Created: {{ card.created_at|date:'Y-m-d H:i' }}</li>
+      <li>Updated: {{ card.updated_at|date:'Y-m-d H:i' }}</li>
+      {% if card.images.first %}
+      <li>Main Storage Key: {{ card.images.first.storage_key }}</li>
+      {% endif %}
+    </ul>
+
+    <div class="detail-actions">
+      <a href="{% url 'cards:edit' card.id %}" class="btn btn-subtle">Edit</a>
+      <form method="post" action="{% url 'cards:delete' card.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </aside>
+</section>
+{% endblock %}

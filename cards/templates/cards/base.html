@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Knowledge Cards{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'cards/styles.css' %}" />
+</head>
+<body>
+  <div class="layout-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-dot"></div>
+        <div>
+          <h2>CIS4517</h2>
+          <p>Cloud Knowledge Card System</p>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <a href="{% url 'cards:dashboard' %}" class="nav-item {% if active_nav == 'dashboard' %}active{% endif %}">Dashboard</a>
+        <a href="{% url 'cards:create' %}" class="nav-item {% if active_nav == 'create' %}active{% endif %}">Create Card</a>
+        <a href="{% url 'cards:browse' %}" class="nav-item {% if active_nav == 'browse' %}active{% endif %}">Browse & Search</a>
+      </nav>
+    </aside>
+
+    <main class="main-area">
+      {% if messages %}
+      <div class="message-stack">
+        {% for message in messages %}
+          <div class="flash {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'cards/base.html' %}
+{% load cards_extras %}
+
+{% block title %}Browse Cards{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>Search & Browse Cards</h1>
+  <p>Find entities by keywords in title, summary, description, and tags.</p>
+</section>
+
+<section class="panel toolbar-panel">
+  <form method="get" action="{% url 'cards:browse' %}" class="toolbar-row">
+    {{ form.q }}
+    {{ form.sort }}
+    <button type="submit" class="btn btn-main">Search</button>
+  </form>
+
+  <form method="post" action="{% url 'cards:search_image' %}" enctype="multipart/form-data" class="toolbar-row image-row">
+    {% csrf_token %}
+    {{ image_form.query_image }}
+    <button type="submit" class="btn btn-subtle">Image Search</button>
+  </form>
+</section>
+
+<section class="meta-bar">
+  <span>{{ result_count }} results{% if image_search_mode %} (image similarity mode){% endif %}</span>
+  <a class="btn btn-subtle" href="{% url 'cards:create' %}">Create New</a>
+</section>
+{% if image_search_mode %}
+<section class="meta-bar image-meta">
+  <span>Query: {{ image_search_meta.query_name }} | Top {{ image_search_meta.top_k }} by histogram similarity</span>
+</section>
+{% endif %}
+
+<section class="result-grid">
+  {% for card in page_obj.object_list %}
+  <article class="result-card">
+    <a href="{% url 'cards:detail' card.id %}"><h3>{{ card.title }}</h3></a>
+    <p>{{ card.summary|truncatechars:100 }}</p>
+    <p class="muted">Tags: {{ card.tags }}</p>
+    {% if image_search_mode and match_scores|dict_get:card.id != '' %}
+    <p class="score">Rank #{{ match_ranks|dict_get:card.id }} | Histogram similarity: {{ match_scores|dict_get:card.id }}%</p>
+    {% endif %}
+    {% if card.images.first %}
+    <img src="{{ card.images.first.image_url }}" alt="{{ card.title }}" class="thumb" />
+    {% endif %}
+    <div class="card-actions">
+      <a href="{% url 'cards:detail' card.id %}">Detail</a>
+      <a href="{% url 'cards:edit' card.id %}">Edit</a>
+    </div>
+  </article>
+  {% empty %}
+  <p>No cards found.</p>
+  {% endfor %}
+</section>
+
+<section class="pager">
+  {% if page_obj.has_previous %}
+  <a href="?page={{ page_obj.previous_page_number }}&q={{ query }}&sort={{ sort }}">Previous</a>
+  {% endif %}
+
+  {% if page_obj.paginator.num_pages > 0 %}
+  <span>Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+  {% else %}
+  <span>Page 0 / 0</span>
+  {% endif %}
+
+  {% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}&q={{ query }}&sort={{ sort }}">Next</a>
+  {% endif %}
+</section>
+{% endblock %}

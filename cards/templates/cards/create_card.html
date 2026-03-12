@@ -1,0 +1,38 @@
+{% extends 'cards/base.html' %}
+
+{% block title %}{% if is_edit %}Edit Card{% else %}Create Card{% endif %}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>{% if is_edit %}Edit Knowledge Card{% else %}Create Knowledge Card{% endif %}</h1>
+  <p>Store text metadata in database and images in storage backend.</p>
+</section>
+
+<section class="panel">
+  <form method="post" enctype="multipart/form-data" class="form-layout">
+    {% csrf_token %}
+
+    <label>Title{{ form.title }}{{ form.title.errors }}</label>
+    <label>Summary{{ form.summary }}{{ form.summary.errors }}</label>
+    <label>Description{{ form.description }}{{ form.description.errors }}</label>
+    <label>Tags (comma separated){{ form.tags }}{{ form.tags.errors }}</label>
+
+    {% if not is_edit %}
+    <label>
+      Primary Image{{ form.images }}{{ form.images.errors }}
+      <small class="muted">Only one image per card (per project convention).</small>
+    </label>
+    {% endif %}
+
+    <div class="form-actions">
+      {% if is_edit %}
+      <a class="btn btn-subtle" href="{% url 'cards:detail' card.id %}">Cancel</a>
+      <button type="submit" class="btn btn-main">Save Changes</button>
+      {% else %}
+      <button type="reset" class="btn btn-subtle">Reset Form</button>
+      <button type="submit" class="btn btn-main">Save Knowledge Card</button>
+      {% endif %}
+    </div>
+  </form>
+</section>
+{% endblock %}

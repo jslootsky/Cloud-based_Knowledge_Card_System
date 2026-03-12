@@ -1,0 +1,43 @@
+{% extends 'cards/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>Knowledge Cards</h1>
+  <p>Manage your local knowledge base before AWS deployment.</p>
+</section>
+
+<section class="stats-grid">
+  <article class="panel stat">
+    <h3>Total Cards</h3>
+    <p>{{ card_count }}</p>
+  </article>
+  <article class="panel stat">
+    <h3>Total Images</h3>
+    <p>{{ image_count }}</p>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>Recent Cards</h2>
+    <a class="btn btn-subtle" href="{% url 'cards:browse' %}">Browse All</a>
+  </div>
+
+  <div class="result-grid">
+    {% for card in recent_cards %}
+    <article class="result-card">
+      <a href="{% url 'cards:detail' card.id %}"><h3>{{ card.title }}</h3></a>
+      <p class="muted">{{ card.category }}</p>
+      <p>{{ card.summary|truncatechars:90 }}</p>
+      {% if card.images.first %}
+      <img class="thumb" src="{{ card.images.first.image_url }}" alt="{{ card.title }}" />
+      {% endif %}
+    </article>
+    {% empty %}
+    <p>No cards yet. Create your first knowledge card.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
