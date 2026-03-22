@@ -42,10 +42,15 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",
             ],
         },
     }
 ]
+
+# Settings for remote HTTP development (EC2)
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 
 WSGI_APPLICATION = "knowledge_card_system.wsgi.application"
 
