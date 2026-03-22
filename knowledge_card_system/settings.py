@@ -85,7 +85,8 @@ if USE_S3:
     AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME", "us-east-1")
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = None
-    AWS_QUERYSTRING_AUTH = False
+    AWS_QUERYSTRING_AUTH = True
+    AWS_S3_SIGNATURE_VERSION = "s3v4"
 
     STORAGES = {
         "default": {
@@ -96,6 +97,7 @@ if USE_S3:
                 "default_acl": AWS_DEFAULT_ACL,
                 "file_overwrite": AWS_S3_FILE_OVERWRITE,
                 "querystring_auth": AWS_QUERYSTRING_AUTH,
+		"signature_version": AWS_S3_SIGNATURE_VERSION,
             },
         },
         "staticfiles": {
