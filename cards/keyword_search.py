@@ -13,6 +13,7 @@ def apply_keyword_search(queryset, keyword: str):
 
     for term in terms:
         query &= (
-            Q(title_icontains=term) | Q(summary_icontains=term) | Q(description_icontains=term) | Q(tags_icontains=term) | Q(keyword_icontains=term)
+            Q(title__icontains=term) | Q(summary__icontains=term) | Q(description__icontains=term) | Q(tags__icontains=term) | Q(keywords__icontains=term)
         )
-    return queryset
+
+    return queryset.filter(query)

@@ -188,15 +188,12 @@ def image_search(request: HttpRequest) -> HttpResponse:
     #fetch in ranked order
     cards_by_id = {
         card.id: card
-        for card in KnowledgeCard.object.prefetch_related("images").filter(
-            id_in=ordered_card_ids
+        for card in KnowledgeCard.objects.prefetch_related("images").filter(
+            id__in=ordered_card_ids
         )
     }
 
     ordered_cards = [cards_by_id[card_id] for card_id in ordered_card_ids if card_id in cards_by_id]
-
-    paginator = Paginator(ordered_cards, 9)
-    page_obj = paginator.get_page(request.GET.get("page"))
 
     paginator = Paginator(ordered_cards, 9)
     page_obj = paginator.get_page(request.GET.get("page"))

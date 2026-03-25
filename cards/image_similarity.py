@@ -6,7 +6,7 @@ from math import sqrt
 def parse_signature(signature: str) -> list[float]:
     #if empty or None, return empty list
     if not signature:
-        return
+        return []
     try:
         #split string by commas, convert each piece into a float, ignore empty values
         return [float(value) for value in signature.split(',') if value]
