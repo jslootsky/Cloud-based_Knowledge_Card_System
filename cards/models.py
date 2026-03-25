@@ -45,6 +45,10 @@ class CardImage(models.Model):
     image = models.ImageField(upload_to="knowledge_cards/%Y/%m/%d")
     original_filename = models.CharField(max_length=255)
     average_hash = models.CharField(max_length=64, blank=True)
+
+    #new histogram signature field
+    histogram_signature = models.TextField(blank=True, default="")
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -44,18 +44,23 @@ def _save_images(card: KnowledgeCard, files) -> None:
         return
     uploaded = files[0]
     existing = card.images.first()
+
+    histogram_signature = compute_color_histogram_signature(uploaded) #computing histogram signature for the uploaded image
+
     if existing:
         existing.image.delete(save=False)
         existing.image = uploaded
         existing.original_filename = uploaded.name
         existing.average_hash = ""
-        existing.save(update_fields=["image", "original_filename", "average_hash"])
+        existing.histogram_signature = histogram_signature
+        existing.save(update_fields=["image", "original_filename", "average_hash", "histogram_signature"])
     else:
         CardImage.objects.create(
             card=card,
             image=uploaded,
             original_filename=uploaded.name,
             average_hash="",
+            histogram_signature=histogram_signature,
         )
 
 
@@ -148,9 +153,50 @@ def image_search(request: HttpRequest) -> HttpResponse:
     # 2) call compare_image_similarity(query_signature, stored_signature)
     # 3) keep best score per card, sort desc, return top IMAGE_TOP_K
     # Default fallback: first 3 cards with images, all scores 0.
-    ordered_cards = list(KnowledgeCard.objects.prefetch_related("images").filter(images__isnull=False).distinct()[:IMAGE_TOP_K])
-    match_scores = {card.id: 0.0 for card in ordered_cards}
-    match_ranks = {card.id: idx + 1 for idx, card in enumerate(ordered_cards)}
+
+    #store best similarity score per card
+    best_scores_by_card: dict[int, float] = {}
+
+    stored_images = CardImage.objects.select_related("card").exclude(
+        histogram_signature=""
+    )
+
+    for stored_image in stored_images:
+        try:
+            similarity = compare_image_similarity(
+                query_signature,
+                stored_image.histogram_signature,
+            )
+        except ValueError:
+            #skip invalid
+            continue
+
+        card_id = stored_image.card_id
+        current_best = best_scores_by_card.get(card_id)
+
+        if current_best is None or similarity > current_best:
+            best_scores_by_card[card_id] = similarity
+
+    ranked_matches = sorted(best_scores_by_card.items(), key=lambda item: item[1], reverse=True)[:IMAGE_TOP_K]
+
+    ordered_card_ids = [card_id for card_id, _score in ranked_matches]
+    match_scores = {card_id: score for card_id, score in ranked_matches}
+    match_ranks ={
+        card_id: idx + 1 for idx, (card_id, _score) in enumerate(ranked_matches)
+    }
+
+    #fetch in ranked order
+    cards_by_id = {
+        card.id: card
+        for card in KnowledgeCard.object.prefetch_related("images").filter(
+            id_in=ordered_card_ids
+        )
+    }
+
+    ordered_cards = [cards_by_id[card_id] for card_id in ordered_card_ids if card_id in cards_by_id]
+
+    paginator = Paginator(ordered_cards, 9)
+    page_obj = paginator.get_page(request.GET.get("page"))
 
     paginator = Paginator(ordered_cards, 9)
     page_obj = paginator.get_page(request.GET.get("page"))
