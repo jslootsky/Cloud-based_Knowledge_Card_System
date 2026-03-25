@@ -1,0 +1,130 @@
+
+== django_migrations ==
+id | app | name | applied
+1 | contenttypes | 0001_initial | 2026-03-22 22:03:16.921580
+2 | auth | 0001_initial | 2026-03-22 22:03:16.949784
+3 | admin | 0001_initial | 2026-03-22 22:03:16.969314
+4 | admin | 0002_logentry_remove_auto_add | 2026-03-22 22:03:16.985056
+5 | admin | 0003_logentry_add_action_flag_choices | 2026-03-22 22:03:16.998016
+6 | contenttypes | 0002_remove_content_type_name | 2026-03-22 22:03:17.018064
+7 | auth | 0002_alter_permission_name_max_length | 2026-03-22 22:03:17.031841
+8 | auth | 0003_alter_user_email_max_length | 2026-03-22 22:03:17.045344
+9 | auth | 0004_alter_user_username_opts | 2026-03-22 22:03:17.059185
+10 | auth | 0005_alter_user_last_login_null | 2026-03-22 22:03:17.073912
+11 | auth | 0006_require_contenttypes_0002 | 2026-03-22 22:03:17.079848
+12 | auth | 0007_alter_validators_add_error_messages | 2026-03-22 22:03:17.090800
+13 | auth | 0008_alter_user_username_max_length | 2026-03-22 22:03:17.104091
+14 | auth | 0009_alter_user_last_name_max_length | 2026-03-22 22:03:17.117237
+15 | auth | 0010_alter_group_name_max_length | 2026-03-22 22:03:17.130000
+16 | auth | 0011_update_proxy_permissions | 2026-03-22 22:03:17.141105
+17 | auth | 0012_alter_user_first_name_max_length | 2026-03-22 22:03:17.154355
+18 | cards | 0001_initial | 2026-03-22 22:03:17.171016
+19 | sessions | 0001_initial | 2026-03-22 22:03:17.185181
+20 | cards | 0002_cardimage_histogram_signature | 2026-03-25 17:39:45.239392
+
+== auth_group_permissions ==
+<empty>
+
+== auth_user_groups ==
+<empty>
+
+== auth_user_user_permissions ==
+<empty>
+
+== django_admin_log ==
+<empty>
+
+== django_content_type ==
+id | app_label | model
+1 | admin | logentry
+2 | auth | permission
+3 | auth | group
+4 | auth | user
+5 | contenttypes | contenttype
+6 | sessions | session
+7 | cards | knowledgecard
+8 | cards | cardimage
+
+== auth_permission ==
+id | content_type_id | codename | name
+1 | 1 | add_logentry | Can add log entry
+2 | 1 | change_logentry | Can change log entry
+3 | 1 | delete_logentry | Can delete log entry
+4 | 1 | view_logentry | Can view log entry
+5 | 2 | add_permission | Can add permission
+6 | 2 | change_permission | Can change permission
+7 | 2 | delete_permission | Can delete permission
+8 | 2 | view_permission | Can view permission
+9 | 3 | add_group | Can add group
+10 | 3 | change_group | Can change group
+11 | 3 | delete_group | Can delete group
+12 | 3 | view_group | Can view group
+13 | 4 | add_user | Can add user
+14 | 4 | change_user | Can change user
+15 | 4 | delete_user | Can delete user
+16 | 4 | view_user | Can view user
+17 | 5 | add_contenttype | Can add content type
+18 | 5 | change_contenttype | Can change content type
+19 | 5 | delete_contenttype | Can delete content type
+20 | 5 | view_contenttype | Can view content type
+21 | 6 | add_session | Can add session
+22 | 6 | change_session | Can change session
+23 | 6 | delete_session | Can delete session
+24 | 6 | view_session | Can view session
+25 | 7 | add_knowledgecard | Can add knowledge card
+26 | 7 | change_knowledgecard | Can change knowledge card
+27 | 7 | delete_knowledgecard | Can delete knowledge card
+28 | 7 | view_knowledgecard | Can view knowledge card
+29 | 8 | add_cardimage | Can add card image
+30 | 8 | change_cardimage | Can change card image
+31 | 8 | delete_cardimage | Can delete card image
+32 | 8 | view_cardimage | Can view card image
+
+== auth_group ==
+<empty>
+
+== auth_user ==
+<empty>
+
+== cards_knowledgecard ==
+id | title | category | summary | description | tags | keywords | created_at | updated_at
+7 | ALEX | Other | pic of alex |  | alex,man,picture,selfie |  | 2026-03-25 17:45:30.708780 | 2026-03-25 17:45:30.708815
+8 | cross | Other | image of a cross |  | cross,statue |  | 2026-03-25 17:45:56.685560 | 2026-03-25 17:45:56.685593
+9 | engagement | Other | picture of an engagement shoot |  | engagement,love,marriage,josh |  | 2026-03-25 17:46:35.667258 | 2026-03-25 17:46:35.667350
+10 | mural | Other | picture of man in front of a mural |  | mural,man,art |  | 2026-03-25 17:46:59.910881 | 2026-03-25 17:46:59.910910
+11 | tree | Other | picture of a tree |  | tree |  | 2026-03-25 17:47:22.487617 | 2026-03-25 17:47:22.487649
+12 | bus | Other | picture inside of a bus |  | bus,selfie,mirror |  | 2026-03-25 17:47:49.074887 | 2026-03-25 17:47:49.074919
+13 | Persian Cat | Animal | Long-haired calm domestic cat. | Long-haired calm domestic cat. | persian,cat,pet,fluffy | indoor,cat breed | 2026-03-25 17:49:37.785278 | 2026-03-25 17:49:37.785315
+14 | Golden Retriever | Animal | Friendly and active dog breed. | Friendly and active dog breed. | dog,pet,family,active | retriever,dog breed | 2026-03-25 17:49:38.557533 | 2026-03-25 17:49:38.557565
+15 | Lavender | Plant | Aromatic flowering plant. | Aromatic flowering plant. | flower,herb,aroma | purple,calming | 2026-03-25 17:49:38.628256 | 2026-03-25 17:49:38.628286
+16 | Vintage Camera | Object | Classic film camera object. | Classic film camera object. | object,lens,film | photography,analog | 2026-03-25 17:49:38.694947 | 2026-03-25 17:49:38.694977
+17 | blue water | Other | blue water image |  | water,blue |  | 2026-03-25 18:10:37.855617 | 2026-03-25 18:10:37.855652
+18 | blue water 2 | Other | image of water |  | blue,water,land |  | 2026-03-25 18:11:08.881666 | 2026-03-25 18:11:08.881697
+19 | blue water 3 | Other | image of water |  | blue,water,ice |  | 2026-03-25 18:11:32.399540 | 2026-03-25 18:11:42.708912
+20 | orange leaf 1 | Other | orange leaf black background |  | orange,leaf |  | 2026-03-25 18:12:55.118470 | 2026-03-25 18:12:55.118504
+21 | orange leaf 2 | Other | reddish orange leaf black background |  | red,orange,leaf |  | 2026-03-25 18:13:24.135106 | 2026-03-25 18:13:24.135137
+22 | orange leaf 3 | Other | yellow orange leaf image black background |  | yellow,orange,leaf |  | 2026-03-25 18:14:05.910821 | 2026-03-25 18:14:05.910852
+23 | lavender field | Other | field of lavender flowers |  | lavender,field,flowers,building |  | 2026-03-25 18:32:17.608129 | 2026-03-25 18:32:17.608170
+
+== django_session ==
+<empty>
+
+== cards_cardimage ==
+id | image | original_filename | average_hash | created_at | card_id | histogram_signature
+7 | knowledge_cards/2026/03/25/alex.JPEG | alex.JPEG |  | 2026-03-25 17:45:30.855983 | 7 | 0.200944,0.215098,0.138961,0.094851,0.084673,0.088331,0.092451,0.084691,0.150275,0.210834,0.217269,0.160503,0.117827,0.098076,0.041876,0.003339,0.109115,0.186377,0.237653,0.219937,0.158836,0.059568,0.022925,0.005588
+8 | knowledge_cards/2026/03/25/cross.jpg | cross.jpg |  | 2026-03-25 17:45:57.593010 | 8 | 0.120473,0.137471,0.141043,0.180534,0.220297,0.083300,0.063293,0.053588,0.127257,0.136688,0.130237,0.142220,0.133933,0.206792,0.076581,0.046292,0.146656,0.126507,0.126416,0.150245,0.080184,0.071580,0.212000,0.086412
+9 | knowledge_cards/2026/03/25/engagement.jpg | engagement.jpg |  | 2026-03-25 17:46:36.200105 | 9 | 0.010960,0.059355,0.139304,0.308112,0.210208,0.164734,0.062902,0.044425,0.017731,0.079445,0.285985,0.224607,0.145435,0.139304,0.057826,0.049668,0.062355,0.263793,0.351202,0.141129,0.115019,0.031628,0.018333,0.016542
+10 | knowledge_cards/2026/03/25/mural.jpg | mural.jpg |  | 2026-03-25 17:47:00.469160 | 10 | 0.030340,0.046083,0.143863,0.182903,0.155204,0.052679,0.224610,0.164319,0.032710,0.051665,0.153569,0.182133,0.150903,0.046526,0.135636,0.246859,0.032803,0.053425,0.173308,0.174113,0.157937,0.085003,0.040499,0.282913
+11 | knowledge_cards/2026/03/25/tree.jpg | tree.jpg |  | 2026-03-25 17:47:23.297292 | 11 | 0.082286,0.225462,0.233797,0.165892,0.105662,0.065809,0.044846,0.076248,0.088857,0.218912,0.228359,0.166494,0.108436,0.067782,0.045855,0.075305,0.130571,0.291759,0.205104,0.130650,0.082850,0.054243,0.038436,0.066386
+12 | knowledge_cards/2026/03/25/bus.jpg | bus.jpg |  | 2026-03-25 17:47:49.145281 | 12 | 0.047346,0.084279,0.134485,0.092598,0.364979,0.204751,0.043419,0.028144,0.039905,0.084487,0.106603,0.134998,0.416222,0.159076,0.037900,0.020809,0.027531,0.100723,0.129341,0.347709,0.284089,0.049974,0.035846,0.024788
+13 | knowledge_cards/2026/03/25/persian_cat.png | persian_cat.png | 0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000 | 2026-03-25 17:49:38.550568 | 13 | 
+14 | knowledge_cards/2026/03/25/golden_retriever.png | golden_retriever.png | 0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000 | 2026-03-25 17:49:38.621826 | 14 | 
+15 | knowledge_cards/2026/03/25/lavender.png | lavender.png | 0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000 | 2026-03-25 17:49:38.688442 | 15 | 
+16 | knowledge_cards/2026/03/25/vintage_camera.png | vintage_camera.png | 0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000 | 2026-03-25 17:49:38.760541 | 16 | 
+17 | knowledge_cards/2026/03/25/blue_water_1.jpg | blue_water_1.jpg |  | 2026-03-25 18:10:38.244742 | 17 | 0.413929,0.113152,0.077204,0.069113,0.063958,0.095262,0.137102,0.030281,0.063486,0.168795,0.163638,0.111402,0.096782,0.095821,0.167597,0.132477,0.033378,0.058102,0.073184,0.094342,0.111702,0.109285,0.152981,0.367026
+18 | knowledge_cards/2026/03/25/blue_water_3.jpg | blue_water_3.jpg |  | 2026-03-25 18:11:09.237252 | 18 | 0.071774,0.158526,0.197460,0.159645,0.125053,0.181331,0.085515,0.020696,0.019388,0.012144,0.082912,0.328788,0.259786,0.199412,0.083398,0.014173,0.025995,0.006326,0.070601,0.338870,0.264390,0.221265,0.070076,0.002476
+19 | knowledge_cards/2026/03/25/blue_water_2.jpg | blue_water_2.jpg |  | 2026-03-25 18:11:32.700912 | 19 | 0.029500,0.047667,0.051613,0.035134,0.079754,0.259352,0.369295,0.127686,0.027104,0.037437,0.037762,0.030097,0.079680,0.287122,0.392132,0.108666,0.022429,0.032776,0.040154,0.024516,0.058666,0.216493,0.428107,0.176859
+20 | knowledge_cards/2026/03/25/orange_leaf_1.jpg | orange_leaf_1.jpg |  | 2026-03-25 18:12:56.112214 | 20 | 0.743004,0.013998,0.026072,0.042875,0.050811,0.049902,0.036772,0.036565,0.795859,0.075280,0.069534,0.037187,0.016599,0.004503,0.000851,0.000186,0.916507,0.062906,0.014840,0.003434,0.001592,0.000542,0.000151,0.000026
+21 | knowledge_cards/2026/03/25/orange_leaf_2.jpg | orange_leaf_2.jpg |  | 2026-03-25 18:13:24.963605 | 21 | 0.743065,0.021129,0.027125,0.023371,0.028484,0.049174,0.053279,0.054373,0.828554,0.084674,0.034469,0.019579,0.016636,0.011176,0.004330,0.000582,0.917839,0.039349,0.017875,0.012711,0.007722,0.003503,0.000909,0.000092
+22 | knowledge_cards/2026/03/25/orange_leaf_3.jpg | orange_leaf_3.jpg |  | 2026-03-25 18:14:06.936730 | 22 | 0.740278,0.039976,0.016383,0.020354,0.041111,0.050334,0.042809,0.048755,0.797535,0.048680,0.063696,0.054633,0.022711,0.009496,0.003148,0.000102,0.971385,0.019553,0.005593,0.001662,0.000986,0.000775,0.000045,0.000001
+23 | knowledge_cards/2026/03/25/lavender_1.jpg | lavender_1.jpg |  | 2026-03-25 18:32:17.776129 | 23 | 0.039268,0.102819,0.175638,0.198090,0.143471,0.077394,0.212986,0.050333,0.188780,0.222845,0.196789,0.113011,0.036830,0.006892,0.032439,0.202413,0.036076,0.142755,0.190556,0.220644,0.131074,0.040651,0.007891,0.230352
